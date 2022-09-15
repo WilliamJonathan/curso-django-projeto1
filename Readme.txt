@@ -1,5 +1,5 @@
 update python packages.
-    pip -m pip install pip setuptools wheel --upgrade
+    python -m pip install pip setuptools wheel --upgrade
 
 create virtual environment.
     python -m venv venv
@@ -22,3 +22,12 @@ libraries and packages.
     pip install pytest pytest-django
     #pillow
     pip install pillow
+
+run migrations
+    python manage.py makemigrations
+    python manage.py migrate
+
+create superuser
+    python manage.py createsuperuser    
+
+##não esquecer de selecionar o intepretador do ambiante virtual caso use vs.code
