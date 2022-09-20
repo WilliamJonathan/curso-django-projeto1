@@ -24,12 +24,20 @@ libraries and packages.
     pip install pillow
     #parameterized
     pip install parameterized
+    #coverage
+    pip install coverage
 
 run migrations
     python manage.py makemigrations
     python manage.py migrate
 
 create superuser
-    python manage.py createsuperuser    
+    python manage.py createsuperuser 
+
+run coverage
+    coverage run --omit='*/venv/*' -m pytest
+    coverage run -m pytest
+    coverage run manage.py test
+    coverage html 
 
 ##não esquecer de selecionar o intepretador do ambiante virtual caso use vs.code
