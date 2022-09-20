@@ -22,6 +22,8 @@ libraries and packages.
     pip install pytest pytest-django
     #pillow
     pip install pillow
+    #parameterized
+    pip install parameterized
 
 run migrations
     python manage.py makemigrations
