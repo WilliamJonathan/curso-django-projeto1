@@ -16,7 +16,7 @@ class RecipeModelTest(RecipeTestBase):
             title='Recipe Title',
             cover='https://loremflickr.com/cache/resized/65535_52205412318_8bfb43cea7_320_240_nofilter.jpg',  # noqa: E501
             description='Recipe Description',
-            slug='recipe-slug',
+            slug='recipe-slug-for-no-defaults',
             preparation_time=10,
             preparation_time_unit='Minutos',
             servings=5,
