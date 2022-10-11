@@ -40,4 +40,12 @@ run coverage
     coverage run manage.py test
     coverage html 
 
+python shell
+    duplicar receita:
+    python manage.py shell
+    from receipes.models import receipe
+    r = Recipe.objects.get(pk=?)
+    r
+    for i in range(???): r.id = None; r.slug = f'texto-slug-{i}'; r.save();
+
 ##não esquecer de selecionar o intepretador do ambiante virtual caso use vs.code
