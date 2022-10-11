@@ -38,7 +38,10 @@ run coverage
     coverage run --omit='*/venv/*' -m pytest
     coverage run -m pytest
     coverage run manage.py test
-    coverage html 
+    coverage html
+
+create environment ambiant
+    pip install python-dotenv
 
 python shell
     duplicar receita:
