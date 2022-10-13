@@ -51,4 +51,7 @@ python shell
     r
     for i in range(???): r.id = None; r.slug = f'texto-slug-{i}'; r.save();
 
+create new app:
+    python manage.py startapp authors    
+
 ##não esquecer de selecionar o intepretador do ambiante virtual caso use vs.code
