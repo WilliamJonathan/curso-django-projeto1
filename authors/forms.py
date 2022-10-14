@@ -34,13 +34,12 @@ class RegisterForm(forms.ModelForm):
         add_placeholder(self.fields['email'], 'Seu e-mail')
         add_placeholder(self.fields['first_name'], 'Ex.: John')
         add_placeholder(self.fields['last_name'], 'Ex.: da Silva')
-        add_attr(self.fields['username'], 'css', 'a-css-class')
+        add_placeholder(self.fields['password'], 'Sua senha')
+        add_placeholder(self.fields['password2'], 'Confirme sua senha')
 
     password = forms.CharField(
         required=True,
-        widget=forms.PasswordInput(attrs={
-            'placeholder': 'Sua senha'
-        }),
+        widget=forms.PasswordInput(),
         label='Senha',
         error_messages={
             'required': 'Senha não pode estar em branco'
@@ -54,9 +53,7 @@ class RegisterForm(forms.ModelForm):
     )
     password2 = forms.CharField(
         required=True,
-        widget=forms.PasswordInput(attrs={
-            'placeholder': 'Confirme sua senha'
-        }),
+        widget=forms.PasswordInput(),
         label='Confirmar senha',
     )
 
@@ -84,14 +81,6 @@ class RegisterForm(forms.ModelForm):
                 'required': 'Campo não pode estar em branco',
             }
         }
-        # widgets = {
-        #     'first_name': forms.TextInput(attrs={
-        #         'placeholder': 'Informe seu primeiro nome aqui'
-        #     }),
-        #     'password': forms.PasswordInput(attrs={
-        #         'placeholder': 'Escolha uma senha'
-        #     })
-        # }
 
     def clean_password(self):
         data = self.cleaned_data.get('password')
