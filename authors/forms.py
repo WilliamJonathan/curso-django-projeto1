@@ -37,8 +37,33 @@ class RegisterForm(forms.ModelForm):
         add_placeholder(self.fields['password'], 'Sua senha')
         add_placeholder(self.fields['password2'], 'Confirme sua senha')
 
+    username = forms.CharField(
+        label='Usuário',
+        help_text=(
+            'O nome de usuário deve conter letras, números ou um desses @.+-_.'
+            'O comprimento deve estar entre 4 e 150 caracteres.'
+        ),
+        error_messages={
+            'required': 'Este campo não deve estar vazio',
+            'min_length': 'O nome de usuário deve ter pelo menos 4 caracteres',
+            'max_length': 'O nome de usuário deve ter menos de 150 caracteres',
+        },
+        min_length=4, max_length=150,
+    )
+    first_name = forms.CharField(
+        error_messages={'required': 'Escreva seu primeiro nome'},
+        label='Primeiro nome'
+    )
+    last_name = forms.CharField(
+        error_messages={'required': 'Escreva seu sobrenome'},
+        label='Último nome'
+    )
+    email = forms.EmailField(
+        error_messages={'required': 'O e-mail é obrigatório'},
+        label='Endereço de email',
+        help_text='O e-mail deve ser válido.',
+    )
     password = forms.CharField(
-        required=True,
         widget=forms.PasswordInput(),
         label='Senha',
         error_messages={
@@ -52,9 +77,11 @@ class RegisterForm(forms.ModelForm):
         validators=[strong_password]
     )
     password2 = forms.CharField(
-        required=True,
         widget=forms.PasswordInput(),
         label='Confirmar senha',
+        error_messages={
+            'required': 'Por favor, repita sua senha'
+        },
     )
 
     class Meta:
@@ -66,45 +93,6 @@ class RegisterForm(forms.ModelForm):
             'email',
             'password',
         ]
-        # exclude = ['first_name]
-        # labels = {
-        #     'first_name': 'Nome',
-        #     'last_name': 'Sobre nome',
-        #     'username': 'Apelido',
-        #     'email': 'E-mail',
-        # }
-        help_texts = {
-            'email': 'Precisa ser um email valido'
-        }
-        error_messages = {
-            'username': {
-                'required': 'Campo não pode estar em branco',
-            }
-        }
-
-    def clean_password(self):
-        data = self.cleaned_data.get('password')
-
-        if 'atenção' in data:
-            raise ValidationError(
-                'Não digite %(pipoca)s no campo password',
-                code='invalid',
-                params={'pipoca': '"atenção"'}
-            )
-
-        return data
-
-    def clean_first_name(self):
-        data = self.cleaned_data.get('first_name')
-
-        if 'John Doe' in data:
-            raise ValidationError(
-                'Não digite %(value)s no campo first name',
-                code='invalid',
-                params={'value': '"John Doe"'}
-            )
-
-        return data
 
     def clean(self):
         cleaned_data = super().clean()
@@ -114,7 +102,7 @@ class RegisterForm(forms.ModelForm):
 
         if password != password2:
             password_confirmation_error = ValidationError(
-                'Senha 1 e senha 2 precisam ser iguais',
+                'Senha e senha2 devem ser iguais',
                 code='invalid'
             )
             raise ValidationError({
