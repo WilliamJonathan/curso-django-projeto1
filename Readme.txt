@@ -46,7 +46,7 @@ create environment ambiant
 python shell
     duplicar receita:
     python manage.py shell
-    from receipes.models import receipe
+    from recipes.models import Recipe
     r = Recipe.objects.get(pk=?)
     r
     for i in range(???): r.id = None; r.slug = f'texto-slug-{i}'; r.save();

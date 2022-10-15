@@ -9,9 +9,8 @@ from recipes.models import Recipe
 
 PER_PAGE = int(os.environ.get('PER_PAGE', 6))
 
+
 # renderiza pagina home
-
-
 def home(request):
 
     recipes = Recipe.objects.filter(
