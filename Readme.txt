@@ -54,4 +54,10 @@ python shell
 create new app:
     python manage.py startapp authors    
 
+install selenium
+    pip install selenium
+
+##apos sempre rodar requirement
+    pip freeze > requirements.txt    
+
 ##não esquecer de selecionar o intepretador do ambiante virtual caso use vs.code
