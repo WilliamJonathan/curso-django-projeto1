@@ -35,3 +35,58 @@ class AuthorsLoginTest(AuthorsBaseTest):
             f'Você está logado com {user.username}.',
             self.browser.find_element(By.TAG_NAME, 'body').text
         )
+
+    def test_login_create_raises_404_if_not_POST_method(self):
+        self.browser.get(
+            self.live_server_url +
+            reverse('authors:login_create')
+        )
+
+        self.assertIn(
+            'Not Found',
+            self.browser.find_element(By.TAG_NAME, 'body').text
+        )
+
+    def test_form_login_is_invalid(self):
+        # Usuário abre a página de login
+        self.browser.get(
+            self.live_server_url + reverse('authors:login')
+        )
+        # Usuário vê o formulário de login
+        form = self.browser.find_element(By.CLASS_NAME, 'main-form')
+        # E tenta enviar valores vazios
+        username = self.get_by_placeholder(form, 'Digite seu nome de usuário')
+        password = self.get_by_placeholder(form, 'Digite sua senha')
+        username.send_keys(' ')
+        password.send_keys(' ')
+        # Envia o formulário
+        form.submit()
+        # Vê uma mensagem de erro na tela
+        self.assertIn(
+            'nome de usuário ou senha inválidos',
+            self.browser.find_element(By.TAG_NAME, 'body').text
+        )
+
+    def test_form_login_invalid_credentials(self):
+        # Usuário abre a página de login
+        self.browser.get(
+            self.live_server_url + reverse('authors:login')
+        )
+
+        # Usuário vê o formulário de login
+        form = self.browser.find_element(By.CLASS_NAME, 'main-form')
+
+        # E tenta enviar valores com dados que não correspondem
+        username = self.get_by_placeholder(form, 'Digite seu nome de usuário')
+        password = self.get_by_placeholder(form, 'Digite sua senha')
+        username.send_keys('invalid_user')
+        password.send_keys('invalid_password')
+
+        # Envia o formulário
+        form.submit()
+
+        # Vê uma mensagem de erro na tela
+        self.assertIn(
+            'Credenciais inválidas',
+            self.browser.find_element(By.TAG_NAME, 'body').text
+        )
