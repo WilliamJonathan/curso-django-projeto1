@@ -4,6 +4,9 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import redirect, render
 from django.urls import reverse
+from recipes.models import Recipe
+
+from authors.forms.recipe_form import AuthorRecipeForm
 
 from .forms import LoginForm, RegisterForm
 
@@ -50,7 +53,6 @@ def login_create(request):
         raise Http404()
 
     form = LoginForm(request.POST)
-    login_url = reverse('authors:login')
 
     if form.is_valid():
         authenticated_user = authenticate(
@@ -66,7 +68,7 @@ def login_create(request):
     else:
         messages.error(request, 'nome de usuário ou senha inválidos')
 
-    return redirect(login_url)
+    return redirect(reverse('authors:dashboard'))
 
 
 @login_required(login_url='authors:login', redirect_field_name='next')
@@ -82,3 +84,43 @@ def logout_view(request):
     messages.success(request, 'Desconectado com sucesso')
     logout(request)
     return redirect(reverse('authors:login'))
+
+
+@login_required(login_url='authors:login', redirect_field_name='next')
+def dashboard(request):
+    recipes = Recipe.objects.filter(
+        is_published=False,
+        author=request.user
+    )
+    return render(
+        request,
+        'authors/pages/dashboard.html',
+        context={
+            'recipes': recipes,
+        }
+    )
+
+
+@login_required(login_url='authors:login', redirect_field_name='next')
+def dashboard_recipe_edit(request, id):
+    recipe = Recipe.objects.filter(
+        is_published=False,
+        author=request.user,
+        pk=id,
+    ).first()
+
+    if not recipe:
+        raise Http404()
+
+    form = AuthorRecipeForm(
+        data=request.POST or None,
+        instance=recipe
+    )
+
+    return render(
+        request,
+        'authors/pages/dashboard_recipe.html',
+        context={
+            'form': form
+        }
+    )
