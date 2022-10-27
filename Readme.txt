@@ -58,6 +58,6 @@ install selenium
     pip install selenium
 
 ##apos sempre rodar requirement
-    pip freeze > requirements.txt    
+    pip freeze > requirements.txt
 
 ##não esquecer de selecionar o intepretador do ambiante virtual caso use vs.code
