@@ -5,7 +5,8 @@ User = get_user_model()
 
 
 class Profile(models.Model):
-    author = models.OneToOneField(User, on_delete=models.CASCADE)
+    author = models.OneToOneField(
+        User, on_delete=models.CASCADE, verbose_name='autor')
     bio = models.TextField(default='', blank=True)
 
     class Meta:
