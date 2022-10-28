@@ -9,32 +9,44 @@ from tag.models import Tag
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=65)
+    name = models.CharField(max_length=65, verbose_name='nome')
 
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'Categoria'
+        verbose_name_plural = 'Categorias'
+
 
 class Recipe(models.Model):
-    title = models.CharField(max_length=65)
-    description = models.CharField(max_length=165)
+    title = models.CharField(max_length=65, verbose_name='titulo')
+    description = models.CharField(max_length=165, verbose_name='descrição')
     slug = models.SlugField(unique=True)
-    preparation_time = models.IntegerField()
-    preparation_time_unit = models.CharField(max_length=65)
-    servings = models.IntegerField()
-    servings_unit = models.CharField(max_length=65)
-    preparation_steps = models.TextField()
-    preparation_steps_is_html = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    is_published = models.BooleanField(default=False)
-    cover = models.ImageField(upload_to='recipes/covers/%Y/%m/%d/')
+    preparation_time = models.IntegerField(verbose_name='tempo de preparação')
+    preparation_time_unit = models.CharField(
+        max_length=65, verbose_name='unidade de tempo de preparação')
+    servings = models.IntegerField(verbose_name='porções')
+    servings_unit = models.CharField(
+        max_length=65, verbose_name='unidade de porções')
+    preparation_steps = models.TextField(verbose_name='etapas de preparação')
+    preparation_steps_is_html = models.BooleanField(
+        default=False, verbose_name='etapas de preparação é html')
+    created_at = models.DateTimeField(
+        auto_now_add=True, verbose_name='criado em')
+    updated_at = models.DateTimeField(
+        auto_now=True, verbose_name='atualizado em')
+    is_published = models.BooleanField(
+        default=False, verbose_name='Está publicado')
+    cover = models.ImageField(
+        upload_to='recipes/covers/%Y/%m/%d/', verbose_name='imagem')
     category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, null=True, blank=True,
         default=None,
+        verbose_name='categoria'
     )
     author = models.ForeignKey(
-        User, on_delete=models.SET_NULL, null=True
+        User, on_delete=models.SET_NULL, null=True, verbose_name='autor'
     )
     tags = models.ManyToManyField(Tag, blank=True, default='')
 
@@ -66,3 +78,7 @@ class Recipe(models.Model):
 
         if error_messages:
             raise ValidationError(error_messages)
+
+    class Meta:
+        verbose_name = 'Receita'
+        verbose_name_plural = 'Receitas'

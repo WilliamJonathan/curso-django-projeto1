@@ -24,6 +24,10 @@ class RecipeAdmin(admin.ModelAdmin):
 
     autocomplete_fields = 'tags',
 
+    class Meta:
+        verbose_name = 'Receita'
+        verbose_name_plural = 'Receitas'
+
 
 # maneira com mais passos de registrar um model
 admin.site.register(Category, CategoryAdmin)
