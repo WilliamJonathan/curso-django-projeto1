@@ -32,6 +32,9 @@ run migrations
     python manage.py migrate
 
 create superuser
+    python manage.py createsuperuser
+
+create superuser
     python manage.py createsuperuser 
 
 run coverage
@@ -65,5 +68,6 @@ django rest framework
 
 ##apos sempre rodar requirement
     pip freeze > requirements.txt
+    pip install -r requirements.txt
 
 ##não esquecer de selecionar o intepretador do ambiante virtual caso use vs.code

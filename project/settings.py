@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # django restframework
-    'rest_framework'
+    'rest_framework',
     # my apps
     'recipes',
     'authors',
