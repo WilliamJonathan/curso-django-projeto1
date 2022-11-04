@@ -14,7 +14,7 @@ class RecipeModelTest(RecipeTestBase):
             category=self.make_category(name='Test Default Category'),
             author=self.make_author(username='newuser'),
             title='Recipe Title',
-            cover='https://loremflickr.com/cache/resized/65535_52205412318_8bfb43cea7_320_240_nofilter.jpg',  # noqa: E501
+            cover='/recipes/covers/2022/11/04/pexels-valeria-boltneva-7474254_1.jpg',  # noqa: E501
             description='Recipe Description',
             slug='recipe-slug-for-no-defaults',
             preparation_time=10,
