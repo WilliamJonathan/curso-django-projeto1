@@ -58,7 +58,10 @@ install selenium
     pip install selenium
 
 django debug toolbar
-    python -m pip install django-debug-toolbar    
+    python -m pip install django-debug-toolbar 
+
+django rest framework
+    pip install djangorestframework       
 
 ##apos sempre rodar requirement
     pip freeze > requirements.txt
