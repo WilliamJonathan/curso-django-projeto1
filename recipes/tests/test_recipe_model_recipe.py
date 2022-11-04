@@ -13,7 +13,7 @@ class RecipeModelTest(RecipeTestBase):
         recipe = Recipe(
             category=self.make_category(name='Test Default Category'),
             author=self.make_author(username='newuser'),
-            title='Recipe Title',
+            title='Recipe Title 2',
             cover='/recipes/covers/2022/11/04/pexels-valeria-boltneva-7474254_1.jpg',  # noqa: E501
             description='Recipe Description',
             slug='recipe-slug-for-no-defaults',
