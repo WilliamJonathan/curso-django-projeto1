@@ -64,7 +64,10 @@ django debug toolbar
     python -m pip install django-debug-toolbar 
 
 django rest framework
-    pip install djangorestframework       
+    pip install djangorestframework  
+
+django-jwt
+    pip install djangorestframework-simplejwt         
 
 ##apos sempre rodar requirement
     pip freeze > requirements.txt
