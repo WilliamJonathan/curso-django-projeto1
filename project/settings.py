@@ -16,6 +16,8 @@ from pathlib import Path
 
 from django.contrib.messages import constants
 
+from utils.environment import get_env_variable, parse_comma_sep_str_to_list
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -34,6 +36,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []  # type: ignore
 
+# CSRF_TRUSTED_ORIGINS: list[str] = parse_comma_sep_str_to_list(
+#     get_env_variable('CSRF_TRUSTED_ORIGINS')
+# )
 
 # Application definition
 
@@ -45,6 +50,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # CORS Hearders
+    'corsheaders',
     # django restframework
     'rest_framework_simplejwt',
     'rest_framework',
@@ -59,6 +66,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -174,7 +182,6 @@ REST_FRAMEWORK = {
     # ),
 }
 
-
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
@@ -182,3 +189,8 @@ SIMPLE_JWT = {
     'SIGNING_KEY': os.environ.get('SECRET_KEY_JWT', 'INSECURE'),
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
+
+
+CORS_ALLOWED_ORIGINS = parse_comma_sep_str_to_list(
+    get_env_variable('CORS_ALLOWED_ORIGINS')
+)
